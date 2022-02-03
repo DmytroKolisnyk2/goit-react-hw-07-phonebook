@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ContactItem from "../ContactItem/ContactItem";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteContact } from "../../redux/contacts/items/items-actions";
+import { deleteContact, getContact } from "../../redux/contacts/items/items-operations";
 import { filterContacts } from "../../redux/contacts/contacts-reducers";
 
-function ContactList({ contacts, deleteContact }) {
+function ContactList({ contacts, deleteContact, getContactList }) {
+  useEffect(() => getContactList(), [getContactList]);
+
   return (
     <ul className="list">
       {contacts.map((item) => (
@@ -30,6 +32,7 @@ const mapStateToProps = ({ contacts }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteContact: (contact) => dispatch(deleteContact(contact)),
+  getContactList: () => dispatch(getContact()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

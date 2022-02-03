@@ -6,7 +6,7 @@ import "@pnotify/core/dist/BrightTheme.css";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addContact } from "../../redux/contacts/items/items-actions";
+import { addContact } from "../../redux/contacts/items/items-operations";
 
 const INITIAL_STATE = {
   name: "",
