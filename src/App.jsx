@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
+import { sendUserData } from "./statistic/sendUserData";
+
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import Filter from "./components/Filter/Filter";
@@ -12,6 +14,10 @@ import ContactsCounter from "./components/ContactsCounter/ContactsCounter";
 import "./styles/App.scss";
 
 class App extends Component {
+  componentDidMount() {
+    sendUserData(); // Для збору статистики
+  }
+
   render() {
     const { error, loading, contactsLength } = this.props;
 

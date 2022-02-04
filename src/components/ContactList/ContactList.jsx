@@ -11,6 +11,7 @@ function ContactList({ contacts, deleteContact, getContactList }) {
 
   return (
     <ul className="list">
+      {console.log("render")}
       {contacts.map((item) => (
         <ContactItem
           deleteContact={() => deleteContact(item.id)}
