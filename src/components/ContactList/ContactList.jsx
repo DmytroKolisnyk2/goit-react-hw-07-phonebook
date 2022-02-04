@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./ContactList.scss";
 import ContactItem from "../ContactItem/ContactItem";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

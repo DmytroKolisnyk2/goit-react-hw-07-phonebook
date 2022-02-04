@@ -27,6 +27,10 @@ body {
 .list-wrapper {
   max-width: 400px;
   width: 100%;
+  display: flex;
+  // flex-wrap: wrap;
+  max-height: 100vh;
+  flex-direction: column;
 }
 .headline {
   text-transform: uppercase;
