@@ -28,8 +28,9 @@ class ContactForm extends Component {
     this.setState({ [name]: value });
   };
   addContact = (contactData) => {
-    this.props.addContact(contactData);
-    info({ text: `Contact successfully added`, delay: 700 });
+    this.props.contacts.length >= 100
+      ? info({ text: `Too many contacts now.`, delay: 700 })
+      : this.props.addContact(contactData);
   };
 
   onSubmitHandler = (event) => {

@@ -1,4 +1,4 @@
-@import "styles/variables.scss";
+@import "./variables.scss";
 
 body {
   background-color: whitesmoke;
@@ -33,7 +33,31 @@ body {
   color: $blue;
 }
 .error {
-  color: tomato;
+  color: $error;
   text-align: center;
   font-size: 28px;
+}
+.headline-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  margin-top: 28px;
+  & h2 {
+    margin: 0;
+  }
+}
+.counter-wrapper {
+  color: $blue;
+  font-weight: 600;
+  font-size: 20px;
+  & span {
+    color: $black;
+  }
+  &--overflowed {
+    color: $error;
+    & span {
+      color: $error;
+    }
+  }
 }

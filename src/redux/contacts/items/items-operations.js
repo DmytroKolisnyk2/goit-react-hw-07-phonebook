@@ -1,46 +1,36 @@
 import axios from "axios";
-
-import {
-  addContactRequest,
-  addContactError,
-  addContactSuccess,
-  deleteContactError,
-  deleteContactRequest,
-  deleteContactSuccess,
-  getContactError,
-  getContactRequest,
-  getContactSuccess,
-} from "./items-actions";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { info } from "@pnotify/core";
+import "@pnotify/core/dist/PNotify.css";
+import "@pnotify/core/dist/BrightTheme.css";
 
 axios.defaults.baseURL = "https://61fb905c87801d0017a2c5b6.mockapi.io";
 
-export const getContact = () => (dispatch) => {
-  dispatch(getContactRequest());
+export const getContact = createAsyncThunk("contacts/getContact", (_, { rejectWithValue }) =>
   axios
     .get("/contacts")
-    .then(({ data }) => {
-      dispatch(getContactSuccess(data));
-    })
-    .catch((error) => dispatch(getContactError(error)));
-};
+    .then(({ data }) => data)
+    .catch(({ message }) => rejectWithValue(message))
+);
 
-export const addContact = (data) => (dispatch) => {
-  dispatch(addContactRequest());
+export const addContact = createAsyncThunk("contacts/addContact", (data, { rejectWithValue }) =>
   axios
     .post("/contacts", data)
     .then(({ data }) => {
-      dispatch(addContactSuccess(data));
+      info({ text: `Contact successfully added`, delay: 700 });
+      return data;
     })
-    .catch((error) => dispatch(addContactError(error)));
-};
+    .catch(({ message }) => rejectWithValue(message))
+);
 
-export const deleteContact = (id) => (dispatch) => {
-  dispatch(deleteContactRequest());
-  axios
-    .delete(`/contacts/${id}`)
-    .then(({ data }) => {
-      dispatch(deleteContactSuccess(id));
-      console.log(data);
-    })
-    .catch((error) => dispatch(deleteContactError(error)));
-};
+export const deleteContact = createAsyncThunk(
+  "contacts/deleteContact",
+  (id, { rejectWithValue }) =>
+    axios
+      .delete(`/contacts/${id}`)
+      .then(({ data }) => {
+        info({ text: `Contact successfully deleted`, delay: 700 });
+        return data.id;
+      })
+      .catch(({ message }) => rejectWithValue(message))
+);

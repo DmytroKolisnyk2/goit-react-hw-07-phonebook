@@ -7,7 +7,7 @@ import { changeFilter } from "../../redux/contacts/filter/filter-actions";
 
 const filterId = nanoid();
 
-function Filter({ onChange, value }) {
+function Filter({ onChange, value}) {
   return (
     <div className="filter">
       <h3 className="phonebook__headline">Find contact by name</h3>

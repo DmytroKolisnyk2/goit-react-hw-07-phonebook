@@ -7,12 +7,14 @@ import ContactList from "./components/ContactList/ContactList";
 import Filter from "./components/Filter/Filter";
 import Message from "./components/Message/Message";
 import LoaderModal from "./components/LoaderModal/LoaderModal";
+import ContactsCounter from "./components/ContactsCounter/ContactsCounter";
 
 import "./styles/App.scss";
 
 class App extends Component {
   render() {
-    const { error, loading } = this.props;
+    const { error, loading, contactsLength } = this.props;
+
     return (
       <>
         {loading && <LoaderModal />}
@@ -24,7 +26,10 @@ class App extends Component {
             <ContactForm />
           </div>
           <div className="list-wrapper">
-            <h2>Contacts</h2>
+            <div className="headline-wrapper">
+              <h2>Contacts</h2>
+              <ContactsCounter changeColor first={contactsLength} second={100} />
+            </div>
             <Filter />
             <Message />
 
@@ -39,6 +44,7 @@ class App extends Component {
 const mapStateToProps = ({ contacts }) => ({
   loading: contacts.loading,
   error: contacts.error,
+  contactsLength: contacts.items.length,
 });
 
 export default connect(mapStateToProps, null)(App);
