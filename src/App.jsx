@@ -12,6 +12,7 @@ import LoaderModal from "./components/LoaderModal/LoaderModal";
 import ContactsCounter from "./components/ContactsCounter/ContactsCounter";
 
 import "./styles/App.scss";
+import { getContactsLength, getError, getLoading } from "./redux/contacts/contacts-selectors";
 
 class App extends Component {
   componentDidMount() {
@@ -47,10 +48,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ contacts }) => ({
-  loading: contacts.loading,
-  error: contacts.error,
-  contactsLength: contacts.items.length,
+const mapStateToProps = (state) => ({
+  loading: getLoading(state),
+  error: getError(state),
+  contactsLength: getContactsLength(state),
 });
 
 export default connect(mapStateToProps, null)(App);

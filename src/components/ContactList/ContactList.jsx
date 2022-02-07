@@ -4,7 +4,7 @@ import ContactItem from "../ContactItem/ContactItem";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteContact, getContact } from "../../redux/contacts/items/items-operations";
-import { filterContacts } from "../../redux/contacts/contacts-reducers";
+import { getFilteredContacts } from "../../redux/contacts/contacts-selectors";
 
 function ContactList({ contacts, deleteContact, getContactList }) {
   useEffect(() => getContactList(), [getContactList]);
@@ -28,8 +28,8 @@ ContactList.propTypes = {
   deleteContact: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ contacts }) => ({
-  contacts: filterContacts(contacts.filter, contacts.items),
+const mapStateToProps = (state) => ({
+  contacts: getFilteredContacts(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,8 +8,3 @@ export const contacts = combineReducers({
   loading,
   error,
 });
-
-export const filterContacts = (query, contacts) =>
-  contacts.filter((element) =>
-    element.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
-  );

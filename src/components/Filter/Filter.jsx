@@ -4,10 +4,11 @@ import "./Filter.scss";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { changeFilter } from "../../redux/contacts/filter/filter-actions";
+import { getFilter } from "../../redux/contacts/contacts-selectors";
 
 const filterId = nanoid();
 
-function Filter({ onChange, value}) {
+function Filter({ onChange, value }) {
   return (
     <div className="filter">
       <h3 className="phonebook__headline">Find contact by name</h3>
@@ -30,8 +31,8 @@ Filter.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ contacts }) => ({
-  value: contacts.filter,
+const mapStateToProps = (state) => ({
+  value: getFilter(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

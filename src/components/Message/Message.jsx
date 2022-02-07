@@ -2,8 +2,12 @@ import React from "react";
 import "./Message.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { filterContacts } from "../../redux/contacts/contacts-reducers";
 import ContactsCounter from "../ContactsCounter/ContactsCounter";
+import {
+  getFilter,
+  getContactsLength,
+  getFilteredContacts,
+} from "../../redux/contacts/contacts-selectors";
 
 function Message({ filter, filteredContacts, contactsLength }) {
   return (
@@ -18,10 +22,10 @@ function Message({ filter, filteredContacts, contactsLength }) {
   );
 }
 
-const mapStateToProps = ({ contacts }) => ({
-  filter: contacts.filter,
-  filteredContacts: filterContacts(contacts.filter, contacts.items),
-  contactsLength: contacts.items.length,
+const mapStateToProps = (state) => ({
+  filter: getFilter(state),
+  filteredContacts: getFilteredContacts(state),
+  contactsLength: getContactsLength(state),
 });
 
 export default connect(mapStateToProps, null)(Message);
